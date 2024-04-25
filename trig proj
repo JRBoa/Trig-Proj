@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rotating Logo Animation</title>
+<style>
+  #logo {
+    position: absolute;
+    width: 100px; /* Adjust size as needed */
+    height: 100px; /* Adjust size as needed */
+    background-color: #ff0000; /* Adjust color as needed */
+    border-radius: 50%; /* Makes the logo circular */
+  }
+</style>
+</head>
+<body>
+<div id="logo"></div>
+<script>
+  // Define initial parameters
+  const initialAngle = 0; // in radians
+  const angularVelocity = 0.1; // in radians per frame
+  const radius = 50; // in pixels
+  let currentAngle = initialAngle;
+
+  // Get logo element
+  const logo = document.getElementById('logo');
+
+  // Function to update logo position and angle
+  function updateLogo() {
+    // Calculate new angle
+    currentAngle += angularVelocity;
+
+    // Calculate new coordinates
+    const newX = radius * Math.cos(currentAngle);
+    const newY = radius * Math.sin(currentAngle);
+
+    // Update logo position
+    logo.style.left = `${newX + window.innerWidth / 2}px`;
+    logo.style.top = `${newY + window.innerHeight / 2}px`;
+
+    // Request next frame
+    requestAnimationFrame(updateLogo);
+  }
+
+  // Start the animation loop
+  updateLogo();
+</script>
+</body>
+</html>
